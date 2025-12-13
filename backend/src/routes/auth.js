@@ -27,6 +27,12 @@ router.post("/register", async (req, res) => {
       [email, hashedPassword]
     );
 
+    // CRÉATION AUTOMATIQUE DU PORTFOLIO
+    await pool.query(
+      "INSERT INTO portfolios (user_id) VALUES ($1)",
+      [newUser.rows[0].id]
+    );
+
     res.status(201).json({
       message: "User created successfully",
       user: newUser.rows[0],
@@ -61,7 +67,7 @@ router.post("/login", async (req, res) => {
     // création d’un token JWT
     const token = jwt.sign(
       { id: user.rows[0].id, email: user.rows[0].email },
-      "secret_key_lumocrypto",  // On mettra plus tard dans un .env
+      "secret_key_lumocrypto",
       { expiresIn: "1h" }
     );
 
