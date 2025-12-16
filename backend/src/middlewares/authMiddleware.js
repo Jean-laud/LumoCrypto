@@ -1,24 +1,19 @@
 const jwt = require("jsonwebtoken");
 
-function authMiddleware(req, res, next) {
-  const authHeader = req.headers["authorization"];
+module.exports = (req, res, next) => {
+  const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    return res.status(401).json({ message: "No token provided" });
+    return res.status(403).json({ message: "No token provided" });
   }
 
-  const token = authHeader.split(" ")[1]; // format "Bearer token"
+  const token = authHeader.split(" ")[1];
 
-  if (!token) {
-    return res.status(401).json({ message: "Invalid token format" });
-  }
-
-  jwt.verify(token, "secret_key_lumocrypto", (err, user) => {
-    if (err) return res.status(403).json({ message: "Invalid or expired token" });
-
-    req.user = user;
+  try {
+    const decoded = jwt.verify(token, "secret_key_lumocrypto");
+    req.user = decoded;
     next();
-  });
-}
-
-module.exports = authMiddleware;
+  } catch (err) {
+    return res.status(403).json({ message: "Invalid token" });
+  }
+};
