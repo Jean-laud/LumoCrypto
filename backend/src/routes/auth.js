@@ -15,7 +15,7 @@ router.post("/register", async (req, res) => {
     );
 
     if (existing.rows.length > 0) {
-      return res.status(400).json({ message: "Email already used" });
+      return res.status(400).json({ message: "Cet email est déjà utilisé." });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -31,11 +31,11 @@ router.post("/register", async (req, res) => {
     );
 
     res.status(201).json({
-      message: "User created",
+      message: "Compte créé avec succès.",
       user: newUser.rows[0],
     });
   } catch (err) {
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Erreur serveur." });
   }
 });
 
@@ -49,12 +49,12 @@ router.post("/login", async (req, res) => {
     );
 
     if (user.rows.length === 0) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(400).json({ message: "Email ou mot de passe incorrect." });
     }
 
     const valid = await bcrypt.compare(password, user.rows[0].password);
     if (!valid) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(400).json({ message: "Email ou mot de passe incorrect." });
     }
 
     const token = jwt.sign(
@@ -64,12 +64,12 @@ router.post("/login", async (req, res) => {
     );
 
     res.json({
-      message: "Login successful",
+      message: "Connexion réussie.",
       token,
       user: { id: user.rows[0].id, email: user.rows[0].email },
     });
   } catch (err) {
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Erreur serveur." });
   }
 });
 
