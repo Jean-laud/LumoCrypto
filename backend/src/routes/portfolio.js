@@ -1,6 +1,9 @@
 const express = require("express");
 const pool = require("../db");
 const authMiddleware = require("../middlewares/authMiddleware");
+const { getPrices } = require("../services/coingecko");
+const symbolMap = require("../utils/symbolMap");
+
 
 const router = express.Router();
 
@@ -12,19 +15,40 @@ router.get("/assets", authMiddleware, async (req, res) => {
     );
 
     if (portfolio.rows.length === 0) {
-      return res.status(404).json({ message: "Portfolio not found" });
+      return res.status(404).json({ message: "Portefeuille introuvable." });
     }
 
-    const assets = await pool.query(
+    const assetsResult = await pool.query(
       "SELECT * FROM assets WHERE portfolio_id = $1",
       [portfolio.rows[0].id]
     );
 
-    res.json(assets.rows);
-  } catch {
-    res.status(500).json({ error: "Server error" });
+    const assets = assetsResult.rows;
+
+    const coinIds = assets
+      .map(a => symbolMap[a.symbol])
+      .filter(Boolean);
+
+    const prices = await getPrices(coinIds);
+
+    const enrichedAssets = assets.map(asset => {
+      const coinId = symbolMap[asset.symbol];
+      const price = prices[coinId]?.eur || 0;
+
+      return {
+        ...asset,
+        price,
+        value: price * asset.quantity,
+      };
+    });
+
+    res.json(enrichedAssets);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Erreur serveur." });
   }
 });
+
 
 router.post("/add-asset", authMiddleware, async (req, res) => {
   const { symbol, quantity } = req.body;
