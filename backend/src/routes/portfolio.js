@@ -190,4 +190,48 @@ router.post("/assets/remove", authMiddleware, async (req, res) => {
   }
 });
 
+router.post("/assets/add", authMiddleware, async (req, res) => {
+  const { assetId, quantity } = req.body;
+
+  if (!quantity || quantity <= 0) {
+    return res.status(400).json({ message: "Quantité invalide." });
+  }
+
+  try {
+    const portfolio = await pool.query(
+      "SELECT * FROM portfolios WHERE user_id = $1",
+      [req.user.id]
+    );
+
+    if (portfolio.rows.length === 0) {
+      return res.status(404).json({ message: "Portefeuille introuvable." });
+    }
+
+    const portfolioId = portfolio.rows[0].id;
+
+    const asset = await pool.query(
+      "SELECT * FROM assets WHERE id = $1 AND portfolio_id = $2",
+      [assetId, portfolioId]
+    );
+
+    if (asset.rows.length === 0) {
+      return res.status(404).json({ message: "Asset introuvable." });
+    }
+
+    const updated = await pool.query(
+      "UPDATE assets SET quantity = quantity + $1 WHERE id = $2 RETURNING *",
+      [quantity, assetId]
+    );
+
+    res.json({
+      message: "Quantité augmentée.",
+      asset: updated.rows[0]
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Erreur serveur." });
+  }
+});
+
 module.exports = router;
