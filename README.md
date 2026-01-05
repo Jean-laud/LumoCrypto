@@ -3,7 +3,6 @@ LumoCrypto
 LumoCrypto est une application web permettant à un utilisateur de gérer un portefeuille de cryptomonnaies de manière sécurisée.  
 Elle offre une authentification, un espace personnel protégé et le suivi en temps réel de la valeur des actifs via une API externe.
 
-Ce projet a été réalisé dans le cadre du **Bloc 3 – Réalisation technique d’une solution digitale (RNCP)**.
 
 
 Objectifs du projet
