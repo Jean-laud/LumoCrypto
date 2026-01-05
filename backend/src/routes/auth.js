@@ -1,7 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const pool = require("../db");
+const pool = require("../../db");
 
 const router = express.Router();
 
@@ -59,9 +59,10 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign(
       { id: user.rows[0].id, email: user.rows[0].email },
-      "secret_key_lumocrypto",
+      process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
+
 
     res.json({
       message: "Connexion réussie.",

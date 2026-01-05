@@ -1,5 +1,5 @@
 const express = require("express");
-const pool = require("../db");
+const pool = require("../../db");
 const authMiddleware = require("../middlewares/authMiddleware");
 const { getPrices } = require("../services/coingecko");
 const symbolMap = require("../utils/symbolMap");
@@ -24,7 +24,6 @@ router.get("/assets", authMiddleware, async (req, res) => {
 
     const assets = assetsResult.rows;
 
-    // Récupération des prix via CoinGecko
     const coinIds = assets
       .map(a => symbolMap[a.symbol])
       .filter(Boolean);
