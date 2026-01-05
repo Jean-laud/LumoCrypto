@@ -1,0 +1,403 @@
+:root {
+  --primary-color: #6366f1;
+  --primary-hover: #5855eb;
+  --text-color: #374151;
+  --text-secondary: #6b7280;
+  --white: #ffffff;
+  --background-light: #f9fafb;
+}
+
+main.portfolio {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+}
+
+.portfolio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.portfolio-header h2 {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.portfolio-add {
+  background: var(--white);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  margin-bottom: 32px;
+}
+
+.portfolio-add form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.portfolio-add h3 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  color: var(--primary-color);
+}
+
+.portfolio-add input {
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.portfolio-add button {
+  padding: 10px 14px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.portfolio-add button:hover {
+  background: var(--primary-hover);
+}
+
+.portfolio-total {
+  background: var(--white);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.portfolio-total p {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-top: 8px;
+}
+
+.portfolio-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.portfolio-empty {
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.asset {
+  background: var(--white);
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.asset-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.asset-header h4 {
+  margin: 0;
+  font-size: 20px;
+  color: var(--primary-color);
+}
+
+.asset-header span {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.asset-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.asset-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.asset-action {
+  display: flex;
+  gap: 8px;
+}
+
+.asset-action input {
+  width: 80px;
+  padding: 6px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.asset-action button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.asset-action button:hover {
+  background-color: var(--primary-hover);
+}
+
+.asset-delete {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ef4444;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+  justify-self: end;
+}
+
+.asset-delete:hover {
+  background-color: #dc2626;
+}
+
+.popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--primary-color);
+  color: white;
+  padding: 14px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  font-size: 15px;
+  animation: popupFade 0.3s ease-out;
+  z-index: 999;
+}
+
+@keyframes popupFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.portfolio-header .logout-button {
+  padding: 10px 16px !important;
+  background: #ef4444 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-size: 15px !important;
+  cursor: pointer !important;
+  transition: 0.2s !important;
+}
+
+.portfolio-header .logout-button:hover {
+  background: #dc2626 !important;
+}
+
+.portfolio-add .crypto-selector {
+  position: relative;
+}
+
+.portfolio-add .burger-btn {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.portfolio-add .burger-btn:hover {
+  background: var(--primary-hover);
+}
+
+.portfolio-add .crypto-menu {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 100%;
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+  z-index: 20;
+}
+
+.portfolio-add .crypto-menu li {
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.portfolio-add .crypto-menu li:hover {
+  background: var(--background-light);
+}
+
+.crypto-selector {
+  position: relative;
+}
+
+.burger-btn {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.burger-btn:hover {
+  background: var(--primary-hover);
+}
+
+.crypto-menu {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 100%;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 10px 0;
+  z-index: 30;
+}
+
+.crypto-search {
+  width: 90%;
+  margin: 0 auto 10px auto;
+  display: block;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.crypto-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.crypto-menu li {
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.crypto-menu li:hover {
+  background: var(--background-light);
+}
+
+.no-result {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 10px;
+}
+
+@media (max-width: 600px) {
+
+  .portfolio-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .portfolio-header h2 {
+    font-size: 26px;
+  }
+
+  .portfolio-add {
+    padding: 18px;
+  }
+
+  .portfolio-add input,
+  .portfolio-add button,
+  .burger-btn {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .crypto-menu {
+    top: 44px;
+    max-height: 220px;
+    overflow-y: auto;
+  }
+
+  .crypto-search {
+    width: 92%;
+  }
+
+  .asset {
+    padding: 16px;
+    gap: 10px;
+  }
+
+  .asset-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .asset-value {
+    font-size: 16px;
+  }
+
+  .asset-footer {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .asset-action {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .asset-action input {
+    width: 100px;
+  }
+
+  .asset-delete {
+    width: 100%;
+    justify-self: stretch;
+    text-align: center;
+  }
+
+  .portfolio-total p {
+    font-size: 24px;
+  }
+}

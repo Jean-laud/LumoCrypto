@@ -1,70 +1,113 @@
-# Getting Started with Create React App
+LumoCrypto — Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Le frontend de LumoCrypto est une application React moderne permettant à l’utilisateur de gérer son portefeuille crypto via une interface simple, fluide et sécurisée.
 
-## Available Scripts
 
-In the project directory, you can run:
+Stack technique
 
-### `npm start`
+- React  
+- React Router  
+- JavaScript  
+- CSS  
+- Fetch API  
+- LocalStorage (token JWT)  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Fonctionnalités
 
-### `npm test`
+Authentification
+- Inscription  
+- Connexion  
+- Stockage du token  
+- Redirection automatique  
+- Protection des routes  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Portefeuille crypto
+- Affichage des actifs  
+- Prix en temps réel  
+- Valeur totale  
+- Ajout / retrait / suppression  
+- Mise à jour automatique  
 
-### `npm run build`
+UI / UX 
+- Pages cohérentes  
+- Burger menu  
+- Responsive  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Architecture
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+frontend/
+│
+├── src/
+│   ├── pages/
+│   │   ├── Login.js
+│   │   ├── Register.js
+│   │   └── Portfolio.js
+│   ├── components/
+│   │   ├── AddAssetForm.js
+│   │   ├── LogoutButton.js
+│   │   └── ProtectedRoute.js
+│   ├── services/
+│   │   ├── api.js
+│   │   
+│   ├── styles/
+│   │   ├── login.css
+│   │   ├── register.css
+│   │   └── portfolio.css
+│   ├── App.jsx
+│   └── index.js
+│
+└── package.json
+```
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Installation
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+cd frontend
+npm install
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+http://localhost:3000
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+Communication avec le backend
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Toutes les requêtes passent par `services/api.js`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Exemple :
 
-### Code Splitting
+```js
+fetch("http://localhost:4000/portfolio/assets", {
+  headers: {
+    Authorization: "Bearer " + localStorage.getItem("token")
+  }
+});
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Sécurité côté client
 
-### Analyzing the Bundle Size
+- Token JWT dans localStorage  
+- Vérification avant accès au Portfolio  
+- Redirection si non connecté  
+- Aucune donnée sensible stockée  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Tests
 
-### Making a Progressive Web App
+- Navigation  
+- Connexion / déconnexion  
+- Ajout / suppression d’actifs  
+- Gestion des erreurs  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+Évolutions possibles
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Mode sombre  
+- Graphiques  
+- Export CSV  
+- Page profil  
+- Animations  
